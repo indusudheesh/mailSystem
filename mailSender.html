@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mailer System</title>
+    <style>
+        form{
+
+            position: relative;
+            top:200px;
+            left:600px;
+            background-image:url('/postcard.jpg');
+            background-repeat: no-repeat;
+            background-size:contain;
+            height: 500px;
+            width: 400px;
+        }
+
+        .st{
+            position: relative;
+            top:80px;
+            left:100px;
+            font-size: 26px;
+        }
+        body{
+            background: url('/mail.png');
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <form method="post" action="/send/sendEmail" onsubmit="return validate()">
+        <div class="st">
+          <label style="color: blue;">Email address</label><br>
+          <input type="text" name='email' id='email'  oninput="clearEmail()" style="font-size: 18px;"><br>
+          <label id='lblEmailVal' style="color: red;"></label><br>
+          <button type="submit" style="position: relative;left: 40px; color: blue; 
+          background-color: rgba(214, 100, 138, 0.973); font-size: 24px;border: none;border-radius: 5px;">Send Email</button>
+        </div>
+        
+        
+      </form>
+    </div>
+      <script>
+      function clearEmail()
+      {
+        document.getElementById("lblEmailVal").innerText=""
+        testemail()
+      }
+      
+      
+      
+      function validate()
+        {
+          let email=document.getElementById("email");
+          let lblemail=document.getElementById("lblEmailVal");
+            if(email.value=="")
+            {   
+              
+              lblemail.innerText="*Enter an email";
+              return false;
+            }
+          
+          else
+          {
+              var e= testemail();
+              if(e)
+              {
+                return true;
+              }
+        
+              else
+              return false;
+        
+          }     
+          
+            
+        
+        }
+        
+        
+        function testemail()
+        {
+          let regexpemail=/^(\w+([\.-]?\w+))@([a-zA-Z0-9\-]+)\.([a-z]{2,3})(.[a-z]{2,3})?$/;
+          let email=document.getElementById("email");
+          let lblemail=document.getElementById("lblEmailVal");
+          if(regexpemail.test(email.value))
+          {
+             return true;    
+          }
+        else
+          { 
+         lblemail.innerText="*Enter a valid email id";
+         email.focus();
+         return false;          
+         } 
+        } </script>
+</body>
+</html>
